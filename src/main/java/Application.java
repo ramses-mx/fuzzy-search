@@ -15,12 +15,14 @@ public class Application {
 	
 		if(args.length >= 1) {
 
-			System.out.println("Comando:" + args[0]);			
+					
 			switch (args[0]) {
 			case "add":
 				for(int i=1;i<args.length;i++) {
 					parametro.append(args[i]).append(" ");
-					
+					agregaCommillas(parametro);
+
+					System.out.println(parametro.toString());
 				}
 				
 				
@@ -42,6 +44,7 @@ public class Application {
 			case "fuzzy-search":
 				for(int i=1;i<args.length;i++) {
 					parametro.append(args[i]).append(" ");
+					agregaCommillas(parametro);
 					
 				}
 
@@ -58,4 +61,16 @@ public class Application {
 			
 	}
 
+	private static void agregaCommillas(StringBuilder parametro) {
+		if(parametro.indexOf("{")!=-1) {
+			parametro.insert(parametro.indexOf("{")+1, "\"");
+		}
+		if(parametro.indexOf(":")!=-1) {
+			parametro.insert(parametro.indexOf(":"), "\"");
+			parametro.insert(parametro.indexOf(":")+1, "\"");
+		}
+		if(parametro.indexOf("}")!=-1) {
+			parametro.insert(parametro.indexOf("}"), "\"");
+		}
+	}
 }
